@@ -1,22 +1,37 @@
-import { Component } from 'react';
-import { FiEdit3, FiTrash } from 'react-icons/fi';
+import { Component } from "react";
+import { FiEdit3, FiTrash } from "react-icons/fi";
 
-import { Container } from './styles';
-import api from '../../services/api';
+import { Container } from "./styles";
+import api from "../../services/api";
 
-class Food extends Component {
-  constructor(props) {
+export interface FoodProps {
+  id: number;
+  image: string;
+  name: string;
+  description: string;
+  available: boolean;
+  price: number;
+}
+
+interface Props {
+  food: FoodProps;
+  handleEditFood: (food: FoodProps) => void;
+  handleDelete: (id: number) => void;
+}
+
+class Food extends Component<Props> {
+  constructor(props: Props) {
     super(props);
 
     const { available } = this.props.food;
     this.state = {
-      isAvailable: available
+      isAvailable: available,
     };
   }
 
   toggleAvailable = async () => {
     const { food } = this.props;
-    const { isAvailable } = this.state;
+    const { isAvailable }: any = this.state;
 
     await api.put(`/foods/${food.id}`, {
       ...food,
@@ -24,16 +39,16 @@ class Food extends Component {
     });
 
     this.setState({ isAvailable: !isAvailable });
-  }
+  };
 
   setEditingFood = () => {
     const { food, handleEditFood } = this.props;
 
     handleEditFood(food);
-  }
+  };
 
   render() {
-    const { isAvailable } = this.state;
+    const { isAvailable }: any = this.state;
     const { food, handleDelete } = this.props;
 
     return (
@@ -70,7 +85,7 @@ class Food extends Component {
           </div>
 
           <div className="availability-container">
-            <p>{isAvailable ? 'Disponível' : 'Indisponível'}</p>
+            <p>{isAvailable ? "Disponível" : "Indisponível"}</p>
 
             <label htmlFor={`available-switch-${food.id}`} className="switch">
               <input
@@ -87,6 +102,6 @@ class Food extends Component {
       </Container>
     );
   }
-};
+}
 
 export default Food;
