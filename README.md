@@ -28,10 +28,10 @@ To clone and run this application, place from your command line:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/isabelamoraes/ignite-reacjs-gorestaurant.git
+$ git clone https://github.com/isabelamoraes/ignite-reactjs-gorestaurant.git
 
 # Go into the repository
-$ cd ignite-reacjs-gorestaurant
+$ cd ignite-reactjs-gorestaurant
 
 # Install dependencies
 $ yarn
